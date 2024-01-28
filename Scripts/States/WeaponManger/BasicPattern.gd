@@ -19,7 +19,6 @@ func Enter():
 	#bullet_manager._rotate(1, -1)
 func Exit():
 	shoot_timer.stop()
-	print('test')
 
 
 func _on_shoot_timer_timeout():
