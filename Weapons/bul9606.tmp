@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfx6fidm2ml8d"]
+
+[ext_resource type="Script" path="res://Weapons/Bullet.gd" id="1_8lfqo"]
+[ext_resource type="Texture2D" uid="uid://bafdhq8s5v4pf" path="res://Weapons/Sprites/Weapons/Pistol/bullet.png" id="2_setj4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k11ty"]
+size = Vector2(5.91511, 2.98317)
+
+[node name="Bullet" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 4
+mass = 0.1
+gravity_scale = 0.0
+script = ExtResource("1_8lfqo")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.0520554, 0)
+scale = Vector2(1.37007, 0.670428)
+shape = SubResource("RectangleShape2D_k11ty")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.015875, 0.015875)
+texture = ExtResource("2_setj4")

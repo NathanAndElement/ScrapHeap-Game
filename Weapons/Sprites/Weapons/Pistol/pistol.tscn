@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcart6gk7sja"]
+
+[ext_resource type="PackedScene" uid="uid://2ffy5dpul43b" path="res://Weapons/weapon.tscn" id="1_gcxem"]
+[ext_resource type="Texture2D" uid="uid://dprur3258cvn0" path="res://Weapons/Sprites/Weapons/Pistol/pistol.png" id="2_wwu5v"]
+
+[node name="Pistol" type="Node2D"]
+
+[node name="Weapon" parent="." instance=ExtResource("1_gcxem")]
+weapon_scene = "res://Weapons/Sprites/Weapons/Pistol/pistol.tscn"
+damage = 10.0
+ammo = 100
+disable_ammo = false
+bullet_scale = Vector2(0.02, 0.02)
+
+[node name="Barrel" type="Node2D" parent="Weapon"]
+position = Vector2(9.19773, -3.18691)
+
+[node name="Sprite" type="Sprite2D" parent="Weapon"]
+texture = ExtResource("2_wwu5v")

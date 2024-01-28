@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cattl3hum58vd"]
+
+[ext_resource type="PackedScene" uid="uid://2ffy5dpul43b" path="res://Weapons/weapon.tscn" id="1_2gmj4"]
+[ext_resource type="Texture2D" uid="uid://bafdhq8s5v4pf" path="res://Weapons/Sprites/Weapons/Pistol/bullet.png" id="2_q0xoe"]
+
+[node name="Sniper" type="Node2D"]
+
+[node name="Weapon" parent="." instance=ExtResource("1_2gmj4")]
+weapon_scene = "res://Weapons/Sprites/Weapons/Sniper/sniper.tscn"
+damage = 100.0
+ammo = 10
+disable_ammo = false
+attack_speed = 1.0
+mag_size = 5
+reload_time = 3
+bullet_speed = 1000
+bullet_scale = Vector2(1, 1)
+
+[node name="Barrel" type="Node2D" parent="Weapon"]
+position = Vector2(9.19773, -3.18691)
+
+[node name="Sprite" type="Sprite2D" parent="Weapon"]
+position = Vector2(-2.38419e-07, -2.38419e-07)
+scale = Vector2(0.0220337, 0.0220337)
+texture = ExtResource("2_q0xoe")

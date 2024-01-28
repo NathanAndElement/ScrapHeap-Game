@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0sj826cac4qk"]
+
+[ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1_qhcp7"]
+[ext_resource type="Texture2D" uid="uid://bc5052xkfgimx" path="res://Sprites/pixil-frame-0.png" id="2_or3ke"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_prore"]
+radius = 3.57142
+
+[node name="Bullet" type="RigidBody2D"]
+scale = Vector2(0.280001, 0.280001)
+gravity_scale = 0.0
+script = ExtResource("1_qhcp7")
+life_span = 10
+speed = 40.0
+wobble_intensity = 0.0
+wobble_intensity_timer_duration = 0.0
+rotation_speed = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.285712, 0.285712)
+texture = ExtResource("2_or3ke")
+
+[node name="WobbleTimer" type="Timer" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_prore")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="WobbleTimer" to="." method="_on_wobble_timer_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

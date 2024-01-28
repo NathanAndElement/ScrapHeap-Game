@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnhjjeo0xjnj1"]
+
+[ext_resource type="Script" path="res://Scripts/BulletManager.gd" id="1_ffxyi"]
+[ext_resource type="Script" path="res://Enemy/StateMachine.gd" id="2_ufq3k"]
+[ext_resource type="Script" path="res://Scripts/States/WeaponManger/BasicPattern.gd" id="3_kfjwe"]
+[ext_resource type="Script" path="res://Scenes/Stop.gd" id="4_6wkxb"]
+
+[node name="BulletManager" type="Node2D"]
+script = ExtResource("1_ffxyi")
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_ufq3k")
+initial_state = NodePath("Stop")
+
+[node name="Basic" type="Node" parent="StateMachine"]
+script = ExtResource("3_kfjwe")
+attack_speed = 0.5
+bullet_speed = 400
+bullet_rotation_offset = 0
+
+[node name="Stop" type="Node" parent="StateMachine"]
+script = ExtResource("4_6wkxb")
+
+[connection signal="timeout" from="ShootTimer" to="StateMachine/Basic" method="_on_shoot_timer_timeout"]

@@ -1,0 +1,150 @@
+[gd_scene load_steps=13 format=3 uid="uid://dtwwgfa30aeuu"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_d4c05"]
+[ext_resource type="Texture2D" uid="uid://chfv1dfwqobfw" path="res://Sprites/char_a_p1_0bas_humn_v01.png" id="2_dkkfm"]
+[ext_resource type="Script" path="res://Scripts/WeaponManager.gd" id="3_aox2j"]
+[ext_resource type="PackedScene" uid="uid://dcart6gk7sja" path="res://Weapons/Sprites/Weapons/Pistol/pistol.tscn" id="4_56csa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mn26i"]
+size = Vector2(14, 14)
+
+[sub_resource type="Animation" id="Animation_4f4uq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [32]
+}
+
+[sub_resource type="Animation" id="Animation_7iy5i"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [53]
+}
+
+[sub_resource type="Animation" id="Animation_oloog"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.5, 0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [48, 49, 50, 51, 52, 53]
+}
+
+[sub_resource type="Animation" id="Animation_dref4"]
+resource_name = "walk_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vkvke"]
+_data = {
+"RESET": SubResource("Animation_4f4uq"),
+"idle": SubResource("Animation_7iy5i"),
+"walk": SubResource("Animation_oloog"),
+"walk_down": SubResource("Animation_dref4")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tp1s0"]
+size = Vector2(13.0301, 29.7444)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y72lm"]
+radius = 30.6552
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(1.30467, 0.941353)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_d4c05")
+
+[node name="RegenTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="InvincibilityTimer" type="Timer" parent="."]
+
+[node name="HeathBar" type="ProgressBar" parent="."]
+modulate = Color(0.262745, 0.65098, 0.219608, 1)
+offset_left = -10.7307
+offset_top = 14.8722
+offset_right = 204.269
+offset_bottom = 54.8722
+scale = Vector2(0.1, 0.1)
+show_percentage = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_dkkfm")
+hframes = 8
+vframes = 8
+frame = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_mn26i")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.7, 0.7)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vkvke")
+}
+
+[node name="WeaponManager" type="Node2D" parent="."]
+position = Vector2(4.59886, -4.2492)
+script = ExtResource("3_aox2j")
+
+[node name="Weapons" type="Node2D" parent="WeaponManager"]
+
+[node name="Pistol" parent="WeaponManager/Weapons" instance=ExtResource("4_56csa")]
+
+[node name="DamageArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(-1.14972, -1.0623)
+shape = SubResource("RectangleShape2D_tp1s0")
+
+[node name="VisibilityArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisibilityArea"]
+shape = SubResource("CircleShape2D_y72lm")
+
+[connection signal="Damage" from="." to="." method="_on_damage"]
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="timeout" from="RegenTimer" to="." method="_on_regen_timer_timeout"]
+[connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
+[connection signal="child_entered_tree" from="WeaponManager" to="WeaponManager" method="_on_child_entered_tree"]
+[connection signal="tree_entered" from="WeaponManager" to="WeaponManager" method="_on_tree_entered"]
+[connection signal="child_entered_tree" from="WeaponManager/Weapons" to="WeaponManager" method="_on_weapons_child_entered_tree"]

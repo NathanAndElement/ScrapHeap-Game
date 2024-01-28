@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnhjjeo0xjnj1"]
+
+[ext_resource type="Script" path="res://Scripts/BulletManager.gd" id="1_ffxyi"]
+[ext_resource type="Script" path="res://Enemy/StateMachine.gd" id="2_ufq3k"]
+[ext_resource type="Script" path="res://Scripts/States/WeaponManger/BasicPattern.gd" id="3_kfjwe"]
+
+[node name="BulletManager" type="Node2D"]
+rotation = 1.5708
+script = ExtResource("1_ffxyi")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_ufq3k")
+initial_state = NodePath("Basic")
+
+[node name="Basic" type="Node" parent="StateMachine"]
+script = ExtResource("3_kfjwe")
+attack_speed = 0.1
+bullet_speed = null
+bullet_life_span = null
+bullet_wobble_intensity = null
+bullet_wobble_intensity_timer_duration = null
+bullet_rotation_offset = null
+bullet_rotation_speed = null
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="ShootTimer" to="StateMachine/Basic" method="_on_shoot_timer_timeout"]

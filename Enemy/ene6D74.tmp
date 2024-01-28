@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://d331edhcm08u3"]
+
+[ext_resource type="Script" path="res://Enemy/enemy.gd" id="1_7luxf"]
+[ext_resource type="Texture2D" uid="uid://bo0cb7gmpifx7" path="res://Sprites/icon.svg" id="1_densu"]
+[ext_resource type="Script" path="res://Enemy/StateMachine.gd" id="3_pvb71"]
+[ext_resource type="Script" path="res://Scripts/States/EnemyFollow.gd" id="4_li22a"]
+[ext_resource type="Script" path="res://Scripts/States/EnemyShoot.gd" id="5_atuxb"]
+[ext_resource type="Script" path="res://Enemy/EnemyRaycast.gd" id="6_6hhxk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xth6h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_65s7k"]
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_7luxf")
+speed = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4.17232e-07, 5.36442e-07)
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("1_densu")
+
+[node name="Navigation" type="Node2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation"]
+path_postprocessing = 1
+avoidance_enabled = true
+avoidance_layers = 7
+avoidance_mask = 7
+
+[node name="Timer" type="Timer" parent="Navigation"]
+wait_time = 0.1
+autostart = true
+
+[node name="CollisionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+shape = SubResource("CircleShape2D_xth6h")
+
+[node name="DamageArea" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_65s7k")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_pvb71")
+initial_state = NodePath("Follow")
+
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("nav_agent", "enemy")]
+script = ExtResource("4_li22a")
+nav_agent = NodePath("../../Navigation/NavigationAgent2D")
+enemy = NodePath("../..")
+state_change_range = null
+
+[node name="Shoot" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_atuxb")
+enemy = NodePath("../..")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(149, 0)
+collision_mask = 7
+collide_with_areas = true
+script = ExtResource("6_6hhxk")
+
+[connection signal="velocity_computed" from="Navigation/NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="velocity_computed" from="Navigation/NavigationAgent2D" to="StateMachine/Follow" method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="Navigation/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Navigation/Timer" to="StateMachine/Follow" method="_on_timer_timeout"]
+[connection signal="area_entered" from="CollisionArea" to="." method="_on_collision_area_entered"]
+[connection signal="area_entered" from="CollisionArea" to="RayCast2D" method="_on_collision_area_area_entered"]
+[connection signal="area_exited" from="CollisionArea" to="." method="_on_collision_area_area_exited"]
+[connection signal="body_shape_entered" from="CollisionArea" to="." method="_on_collision_area_body_shape_entered"]
+[connection signal="Transitioned" from="StateMachine/Follow" to="StateMachine" method="_on_follow_transitioned"]
