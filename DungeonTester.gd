@@ -9,21 +9,20 @@ var room_variants = load("res://Scenes/room_variants.tscn")
 
 func _ready():
 	dungeon = DungeonGeneration.generate(533)
-	print(dungeon)
 	load_map()
 
 func load_map():
 	for i in range(0, map_node.get_child_count()):
 		map_node.get_child(i).queue_free()
 		
-	for i in dungeon.keys():
+	for i in dungeon:
 		var temp = Sprite2D.new()
 		temp.texture = node_sprite
-		var room_instance = room_variants.instantiate()
+		var room_instance = dungeon[i].room.instantiate()
 		map_node.add_child(room_instance)
 		room_instance.z_index = 1
 		room_instance.position = i * 514
-		var c_rooms = dungeon.get(i).connected_rooms
+		var c_rooms = dungeon[i].connected_rooms
 		if(c_rooms.get(Vector2(1, 0)) != null):
 			temp = Sprite2D.new()
 			temp.texture = branch_sprite
