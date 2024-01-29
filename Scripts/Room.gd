@@ -1,7 +1,7 @@
 extends Node
 
 var room = preload("res://Scenes/room_variants.tscn")
-
+	
 var door_states = {
 	Vector2(1,0): true,   # Right door
 	Vector2(-1,0): true,  # Left door
