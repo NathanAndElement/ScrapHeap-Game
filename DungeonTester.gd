@@ -18,7 +18,10 @@ func load_map():
 	for i in dungeon:
 		var temp = Sprite2D.new()
 		temp.texture = node_sprite
-		var room_instance = dungeon[i].room.instantiate()
+		var room_instance = dungeon[i].room_scene.instantiate()
+		var room = room_instance.get_child(dungeon[i].room_index)
+		room.process_mode = 0 # = Mode: Inherit
+		room.show()
 		map_node.add_child(room_instance)
 		room_instance.z_index = 1
 		room_instance.position = i * 514

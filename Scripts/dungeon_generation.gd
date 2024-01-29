@@ -7,6 +7,8 @@ var room = preload("res://Scenes/room.tscn")
 
 @export var generation_chance = 20
 
+
+	
 func generate(room_seed):
 	seed(room_seed)
 	var dungeon = {}
@@ -14,6 +16,8 @@ func generate(room_seed):
 	
 	dungeon[Vector2(0,0)] = room.instantiate()
 	size -= 1
+	
+
 	
 	while(size > 0):
 		for i in dungeon.keys():

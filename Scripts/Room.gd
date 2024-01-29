@@ -1,13 +1,12 @@
 extends Node
 
-var room = preload("res://Scenes/room_variants.tscn")
-	
-var door_states = {
-	Vector2(1,0): true,   # Right door
-	Vector2(-1,0): true,  # Left door
-	Vector2(0,1): true,   # Bottom door
-	Vector2(0,-1): true   # Top door
-  }
+
+var room_instance = preload("res://Scenes/room_variants.tscn").instantiate()
+var room_index = randf_range(0, room_instance.get_child_count())
+var room = room_instance.get_child(room_index)
+
+var room_scene = preload("res://Scenes/room_variants.tscn")
+var door_states = room.door_states
 
 func set_door_state(direction, state):
 	if direction in door_states:
