@@ -14,12 +14,13 @@ func _ready():
 func load_map():
 	for i in range(0, map_node.get_child_count()):
 		map_node.get_child(i).queue_free()
-		
+	
 	for i in dungeon:
 		var temp = Sprite2D.new()
 		temp.texture = node_sprite
 		var room_instance = dungeon[i].room_scene.instantiate()
 		var room = room_instance.get_child(dungeon[i].room_index)
+		room.generate_doors(dungeon[i].connected_rooms)
 		room.process_mode = 0 # = Mode: Inherit
 		room.show()
 		map_node.add_child(room_instance)

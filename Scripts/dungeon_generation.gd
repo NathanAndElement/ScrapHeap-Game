@@ -4,23 +4,16 @@ var room = preload("res://Scenes/room.tscn")
 
 @export var min_number_rooms = 10
 @export var max_number_rooms = 10 
-
 @export var generation_chance = 20
 
-
-	
 func generate(room_seed):
 	seed(room_seed)
 	var dungeon = {}
 	var size = floor(randf_range(min_number_rooms, max_number_rooms))
-	
 	dungeon[Vector2(0,0)] = room.instantiate()
 	size -= 1
 	
 	while(size > 0):
-		if(size <= 1):
-			delete_unused_doors(dungeon)
-		
 		for i in dungeon.keys():
 			if(randf_range(0, 100) < generation_chance):
 				var direction = randf_range(0, 4)
@@ -56,11 +49,3 @@ func connect_rooms(room1, room2, direction):
 		room1.number_of_connections += 1
 		room2.number_of_connections += 1
 		
-func delete_unused_doors(dungeon):
-	for room_id in dungeon.keys():
-		var doors_to_delete = []
-		var room = dungeon[room_id]
-		for door in room.connected_rooms:
-			if(dungeon[room_id].connected_rooms[door] == null):
-				doors_to_delete.append(door)
-		dungeon[room_id].room.delete_unused_doors(doors_to_delete)
