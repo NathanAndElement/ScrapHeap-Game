@@ -15,7 +15,6 @@ func generate_doors(connected_rooms):
 		if(connected_rooms[door] != null):
 			doors_to_add[door] = connected_rooms[door]
 	
-	print(doors_to_add)
 	var offset_distance = 240  # Adjust based on your door size or desired distance from the center
 	for door in doors_to_add:
 		if doors_to_add[door]:
