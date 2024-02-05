@@ -10,8 +10,7 @@ extends Node
 var door_scene = preload("res://Scenes/door.tscn")
 
 func generate_doors(connected_rooms):
-	var doors_to_add = {}
-	
+	var doors_to_add = {}	
 	for door in connected_rooms.keys():
 		if(connected_rooms[door] != null):
 			doors_to_add[door] = connected_rooms[door]
