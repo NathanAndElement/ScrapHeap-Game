@@ -42,7 +42,7 @@ func generate(room_seed):
 		
 		if attempt_count >= attempt_limit and not created_room:
 			print("Max attempts reached, unable to create more rooms.")
-			break # Optional: Adjust this based on your requirements
+			break
 
 	create_start_end_rooms(dungeon)
 	return dungeon
@@ -51,8 +51,6 @@ func create_rooms(dungeon, direction, i):
 	var new_room_position = i + direction
 	if not dungeon.has(new_room_position):
 		dungeon[new_room_position] = room.instantiate()
-		# Assuming is_door_enabled returns true for simplification
-		# Connect rooms logic here (simplified for brevity)
 		if (dungeon[new_room_position].is_door_enabled(-direction)):
 			connect_rooms(dungeon.get(i), dungeon.get(new_room_position), direction)
 			return true
