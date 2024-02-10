@@ -3,12 +3,16 @@ extends Node
 var room = preload("res://Scenes/room.tscn")
 var start_room_instance = preload("res://Scenes/start_rooms.tscn").instantiate()
 var end_room_instance = preload("res://Scenes/end_rooms.tscn").instantiate()
+var hidden_room_instance = preload("res://Scenes/hidden_rooms.tscn").instantiate()
 var start_room = start_room_instance.get_node("Start")
 var end_room = end_room_instance.get_node("End")
+var hidden_room = hidden_room_instance.get_node("Room1")
 
 @export var min_number_rooms = 5
 @export var max_number_rooms = 10 
 @export var generation_chance = 20
+@export var hidden_room_chance = 10
+@export var hidden_room_loops = 10
 
 func generate(room_seed):
 	seed(room_seed)
@@ -45,6 +49,7 @@ func generate(room_seed):
 			break
 
 	create_start_end_rooms(dungeon)
+	create_hidden_rooms(dungeon)
 	return dungeon
 
 func create_rooms(dungeon, direction, i):
@@ -72,6 +77,30 @@ func create_start_end_rooms(dungeon):
 	dungeon[lowest_value].room = start_room
 	dungeon[highest_value].room = end_room
 	
+func create_hidden_rooms(dungeon):
+	var lowest_value = Vector2(0, 0)
+	var highest_value = Vector2(0, 0)
+	var potential_links = {}
+	for i in dungeon.keys():
+		var room = dungeon[i]
+		#check the room connections
+		if(!room.connected_rooms[Vector2(0, 1)] and room.is_door_enabled(Vector2(0, 1))):
+				potential_links[i + Vector2(0, 1)] = hidden_room
+		if(!room.connected_rooms[Vector2(0, -1)] and room.is_door_enabled(Vector2(0, -1))):
+				potential_links[i + Vector2(0, -1)] = hidden_room
+		if(!room.connected_rooms[Vector2(1, 0)] and room.is_door_enabled(Vector2(1, 0))):
+				potential_links[i + Vector2(1, 0)] = hidden_room
+		if(!room.connected_rooms[Vector2(-1, 0)] and room.is_door_enabled(Vector2(-1, 0))):
+				potential_links[i + Vector2(-1, 0)] = hidden_room
+	#Loop through potential links and use spawn chance to decide whether to spawn a hidden room there or not
+	for i in potential_links.keys():
+		
+		if randf() * 100 < hidden_room_chance:
+			dungeon[i] = room.instantiate()
+			dungeon[i].room = hidden_room
+			print('spawning hidden room!')
+		hidden_room_loops -= 1
+
 
 func connect_rooms(room1, room2, direction):
 		room1.connected_rooms[direction] = room2
