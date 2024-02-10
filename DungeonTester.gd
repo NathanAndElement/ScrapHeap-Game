@@ -4,8 +4,8 @@ var dungeon = {}
 var node_sprite = load("res://Sprites/map_nodes1.png")
 var branch_sprite = load("res://Sprites/map_nodes3.png")
 var room_variants = load("res://Scenes/room_variants.tscn")
-var start_room_variants = load("res://start_rooms.tscn")
-var end_room_variants = load("res://end_rooms.tscn")
+var start_room_variants = load("res://Scenes/start_rooms.tscn")
+var end_room_variants = load("res://Scenes/end_rooms.tscn")
 
 @onready var map_node = $MapNode
 
@@ -21,6 +21,7 @@ func load_map():
 		if(dungeon[i].room.name == 'End' or dungeon[i].room.name == 'Start'):
 			var start_room_instance = start_room_variants.instantiate()
 			var start_room = start_room_instance.get_node("Start")
+			start_room.generate_doors(dungeon[i].connected_rooms)
 			start_room.process_mode = 0 # = Mode: Inherit
 			start_room.show()
 			map_node.add_child(start_room_instance)
@@ -29,6 +30,7 @@ func load_map():
 			
 			var end_room_instance = end_room_variants.instantiate()
 			var end_room = end_room_instance.get_node("End")
+			end_room.generate_doors(dungeon[i].connected_rooms)
 			end_room.process_mode = 0 # = Mode: Inherit
 			end_room.show()
 			map_node.add_child(end_room_instance)

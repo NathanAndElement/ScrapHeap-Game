@@ -1,8 +1,8 @@
 extends Node
 
 var room = preload("res://Scenes/room.tscn")
-var start_room_instance = preload("res://start_rooms.tscn").instantiate()
-var end_room_instance = preload("res://end_rooms.tscn").instantiate()
+var start_room_instance = preload("res://Scenes/start_rooms.tscn").instantiate()
+var end_room_instance = preload("res://Scenes/end_rooms.tscn").instantiate()
 var start_room = start_room_instance.get_node("Start")
 var end_room = end_room_instance.get_node("End")
 
@@ -71,8 +71,8 @@ func create_start_end_rooms(dungeon):
 			highest_value = i
 	dungeon[lowest_value].room = start_room
 	dungeon[highest_value].room = end_room
+	
 
-			
 func connect_rooms(room1, room2, direction):
 		room1.connected_rooms[direction] = room2
 		room2.connected_rooms[-direction] = room1
