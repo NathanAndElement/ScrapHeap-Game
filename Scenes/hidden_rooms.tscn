@@ -5,25 +5,13 @@
 
 [node name="hidden_rooms" type="Node2D"]
 
-[node name="Room1" type="Node2D" parent="."]
+[node name="Hidden1" type="Node2D" parent="."]
 process_mode = 4
 visible = false
 script = ExtResource("1_o8sfi")
 hidden_room = true
 
-[node name="Icon2" type="Sprite2D" parent="Room1"]
-modulate = Color(1, 1, 1, 0.0509804)
-position = Vector2(0, 4.76837e-07)
-scale = Vector2(4, 4)
-texture = ExtResource("2_2sql5")
-
-[node name="Room3" type="Node2D" parent="."]
-process_mode = 4
-visible = false
-script = ExtResource("1_o8sfi")
-hidden_room = true
-
-[node name="Icon" type="Sprite2D" parent="Room3"]
+[node name="Icon2" type="Sprite2D" parent="Hidden1"]
 modulate = Color(1, 1, 1, 0.0509804)
 position = Vector2(0, 4.76837e-07)
 scale = Vector2(4, 4)

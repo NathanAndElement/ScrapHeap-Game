@@ -5,6 +5,6 @@
 [node name="hidden_door" type="Node2D"]
 
 [node name="Bullet" type="Sprite2D" parent="."]
-position = Vector2(1.90735e-06, -1.90735e-06)
-scale = Vector2(12.9167, 12.9167)
+position = Vector2(-1.90735e-06, -1.90735e-06)
+scale = Vector2(3.79168, 3.79168)
 texture = ExtResource("1_m2bmq")

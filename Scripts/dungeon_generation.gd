@@ -6,7 +6,7 @@ var end_room_instance = preload("res://Scenes/end_rooms.tscn").instantiate()
 var hidden_room_instance = preload("res://Scenes/hidden_rooms.tscn").instantiate()
 var start_room = start_room_instance.get_node("Start")
 var end_room = end_room_instance.get_node("End")
-var hidden_room = hidden_room_instance.get_node("Room1")
+var hidden_room = hidden_room_instance.get_node("Hidden1")
 
 @export var min_number_rooms = 5
 @export var max_number_rooms = 10 
@@ -78,27 +78,31 @@ func create_start_end_rooms(dungeon):
 	dungeon[highest_value].room = end_room
 	
 func create_hidden_rooms(dungeon):
-	var lowest_value = Vector2(0, 0)
-	var highest_value = Vector2(0, 0)
+	#Rooms that are potentially free tiles with potential doors
 	var potential_links = {}
 	for i in dungeon.keys():
 		var room = dungeon[i]
 		#check the room connections
 		if(!room.connected_rooms[Vector2(0, 1)] and room.is_door_enabled(Vector2(0, 1))):
-				potential_links[i + Vector2(0, 1)] = hidden_room
+			#make sure the room doesnt already exist on the new given index as this would make connected_rooms incorrect
+			if(!dungeon.has(i + Vector2(0, 1))):
+				potential_links[i + Vector2(0, 1)] = Vector2(0, 1)
 		if(!room.connected_rooms[Vector2(0, -1)] and room.is_door_enabled(Vector2(0, -1))):
-				potential_links[i + Vector2(0, -1)] = hidden_room
+			if(!dungeon.has(i + Vector2(0, -1))):
+				potential_links[i + Vector2(0, -1)] = Vector2(0, -1)
 		if(!room.connected_rooms[Vector2(1, 0)] and room.is_door_enabled(Vector2(1, 0))):
-				potential_links[i + Vector2(1, 0)] = hidden_room
+			if(!dungeon.has(i + Vector2(1, 0))):
+				potential_links[i + Vector2(1, 0)] = Vector2(1, 0)
 		if(!room.connected_rooms[Vector2(-1, 0)] and room.is_door_enabled(Vector2(-1, 0))):
-				potential_links[i + Vector2(-1, 0)] = hidden_room
+			if(!dungeon.has(i + Vector2(-1, 0))):
+				potential_links[i + Vector2(-1, 0)] = Vector2(-1, 0)
 	#Loop through potential links and use spawn chance to decide whether to spawn a hidden room there or not
 	for i in potential_links.keys():
-		
 		if randf() * 100 < hidden_room_chance:
 			dungeon[i] = room.instantiate()
 			dungeon[i].room = hidden_room
-			print('spawning hidden room!')
+			print(dungeon[i])
+			connect_rooms(dungeon.get(i - potential_links[i]), dungeon.get(i), potential_links[i])
 		hidden_room_loops -= 1
 
 

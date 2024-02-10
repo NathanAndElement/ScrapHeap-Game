@@ -24,6 +24,7 @@ func generate_doors(connected_rooms):
 			var new_door = null;
 			if(hidden_room == true):
 				new_door = hidden_door_scene.instantiate()
+				
 			else:
 				new_door = door_scene.instantiate()
 			var offset = door * offset_distance  # Calculate offset based on direction
