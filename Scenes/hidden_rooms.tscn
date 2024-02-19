@@ -9,7 +9,12 @@
 process_mode = 4
 visible = false
 script = ExtResource("1_o8sfi")
-hidden_room = true
+hidden_doors = {
+Vector2(-1, 0): true,
+Vector2(0, -1): true,
+Vector2(0, 1): true,
+Vector2(1, 0): true
+}
 
 [node name="Icon2" type="Sprite2D" parent="Hidden1"]
 modulate = Color(1, 1, 1, 0.0509804)
