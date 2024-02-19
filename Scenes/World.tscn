@@ -4135,7 +4135,7 @@ position = Vector2(-66, -81)
 position = Vector2(-120, 42)
 
 [node name="Sniper" parent="." instance=ExtResource("4_lmmeg")]
-position = Vector2(-27, -23)
+position = Vector2(535, -1)
 
 [node name="Pistol" parent="." instance=ExtResource("5_1rs2b")]
 position = Vector2(-209, -133)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxvv4or8h0p35"]
+
+[ext_resource type="Texture2D" uid="uid://bo0cb7gmpifx7" path="res://Sprites/icon.svg" id="1_25qrl"]
+
+[node name="Door" type="Node2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+process_mode = 3
+scale = Vector2(0.15625, 0.140625)
+texture = ExtResource("1_25qrl")
