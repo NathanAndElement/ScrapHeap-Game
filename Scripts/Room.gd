@@ -1,9 +1,17 @@
 extends Node
 
+var four_doors = preload("res://Scenes/room_4_doors.tscn").instantiate()
+var basic_2_doors = preload("res://Scenes/room_2_doors.tscn").instantiate()
 
-var room_instance = preload("res://Scenes/room_variants.tscn").instantiate()
-var room_index = randf_range(0, room_instance.get_child_count())
-var room = room_instance.get_child(room_index)
+var variations = [
+	four_doors,	
+	basic_2_doors,
+]
+
+var chosen_variation = variations[randi() % variations.size()]
+
+var room_instance = chosen_variation
+var room = chosen_variation
 
 var room_scene = preload("res://Scenes/room_variants.tscn")
 var door_states = room.door_states

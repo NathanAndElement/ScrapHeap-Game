@@ -14,7 +14,6 @@ extends Node
 	Vector2(0,-1): false,
 }
 
-
 var door_scene = preload("res://Scenes/door.tscn")
 var hidden_door_scene = preload("res://Scenes/hidden_door.tscn")
 

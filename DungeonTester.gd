@@ -51,14 +51,13 @@ func load_map():
 			end_room_instance.position = i * 514
 		else:
 			
-			var room_instance = dungeon[i].room_scene.instantiate()
-			var room = room_instance.get_child(dungeon[i].room_index)
+			var room = dungeon[i].chosen_variation
 			room.generate_doors(dungeon[i].connected_rooms, dungeon[i].room.hidden_doors)
 			room.process_mode = 0 # = Mode: Inherit
 			room.show()
-			map_node.add_child(room_instance)
-			room_instance.z_index = 1
-			room_instance.position = i * 514
+			map_node.add_child(room)
+			room.z_index = 1
+			room.position = i * 514
 		var c_rooms = dungeon[i].connected_rooms
 		var temp = Sprite2D.new()
 		temp.texture = node_sprite
