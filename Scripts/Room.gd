@@ -28,7 +28,7 @@ var room = chosen_variation
 
 var room_scene = preload("res://Scenes/room_variants.tscn")
 var door_states = room.door_states
-var type = 'basic' #basic | start | end
+var type = 'basic' #basic | start | end | hidden
 
 func set_door_state(direction, state):
 	if direction in door_states:

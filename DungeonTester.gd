@@ -30,8 +30,6 @@ func load_map():
 		if(dungeon[i].type == 'end' or dungeon[i].type == 'start'):
 			var start_room = dungeon[i].start_room
 			start_room.generate_doors(dungeon[i].connected_rooms, dungeon[i].room.hidden_doors)
-			print(dungeon[i].room.hidden_doors, 'hidden')
-			print(dungeon[i].room.door_states, 'door_states')
 			start_room.process_mode = 0 # = Mode: Inherit
 			start_room.show()
 			map_node.add_child(start_room)

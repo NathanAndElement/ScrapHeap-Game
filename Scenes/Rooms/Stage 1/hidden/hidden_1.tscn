@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4mflgv8gpkvj"]
+
+[ext_resource type="Texture2D" uid="uid://bo0cb7gmpifx7" path="res://Sprites/icon.svg" id="1_38wdm"]
+[ext_resource type="Script" path="res://Scenes/room.gd" id="1_imsja"]
+
+[node name="hidden_1" type="Node2D"]
+script = ExtResource("1_imsja")
+hidden_doors = {
+Vector2(-1, 0): true,
+Vector2(0, -1): true,
+Vector2(0, 1): true,
+Vector2(1, 0): true
+}
+
+[node name="Icon2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.0509804)
+position = Vector2(0, 4.76837e-07)
+scale = Vector2(4, 4)
+texture = ExtResource("1_38wdm")
