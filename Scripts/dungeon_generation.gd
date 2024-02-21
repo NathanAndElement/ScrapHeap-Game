@@ -4,9 +4,9 @@ var room = preload("res://Scenes/room.tscn")
 var start_room_instance = preload("res://Scenes/start_rooms.tscn").instantiate()
 var end_room_instance = preload("res://Scenes/end_rooms.tscn").instantiate()
 var hidden_room_instance = preload("res://Scenes/hidden_rooms.tscn").instantiate()
-var start_room = start_room_instance.get_node("Start")
-var end_room = end_room_instance.get_node("End")
 var hidden_room = hidden_room_instance.get_node("Hidden1")
+
+
 
 @export var min_number_rooms = 5
 @export var max_number_rooms = 10 
@@ -79,8 +79,8 @@ func create_start_end_rooms(dungeon):
 					highest_value = i
 
 	if lowest_value != Vector2(INF, INF) and highest_value != Vector2(-INF, -INF):
-		dungeon[lowest_value].room = start_room
-		dungeon[highest_value].room = end_room
+		dungeon[lowest_value].type = 'start'
+		dungeon[highest_value].type = 'end'
 
 
 
