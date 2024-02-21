@@ -3,8 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://d2x53g6np084i" path="res://Sprites/bullet.png" id="1_m2bmq"]
 
 [node name="hidden_door" type="Node2D"]
+scale = Vector2(3.44, 3.44)
 
 [node name="Bullet" type="Sprite2D" parent="."]
 position = Vector2(-1.90735e-06, -1.90735e-06)
-scale = Vector2(3.79168, 3.79168)
+scale = Vector2(-1.28281, -1.28281)
 texture = ExtResource("1_m2bmq")

@@ -4,9 +4,7 @@ var dungeon = {}
 var node_sprite = load("res://Sprites/map_nodes1.png")
 var branch_sprite = load("res://Sprites/map_nodes3.png")
 var room_variants = load("res://Scenes/room_variants.tscn")
-var start_room_variants = load("res://Scenes/start_rooms.tscn")
 var hidden_room_variants = load("res://Scenes/hidden_rooms.tscn")
-var end_room_variants = load("res://Scenes/end_rooms.tscn")
 
 @onready var map_node = $MapNode
 
@@ -29,26 +27,22 @@ func load_map():
 			hidden_room_instance.z_index = 1
 			hidden_room_instance.position = i * 514
 			
-		if(dungeon[i].room.name == 'End' or dungeon[i].room.name == 'Start'):
-			var start_room_instance = start_room_variants.instantiate()
-			var start_room = start_room_instance.get_node("Start")
+		if(dungeon[i].type == 'end' or dungeon[i].type == 'start'):
+			var start_room = dungeon[i].start_room
 			start_room.generate_doors(dungeon[i].connected_rooms, dungeon[i].room.hidden_doors)
-			print(dungeon[i].room.hidden_doors, 'hidden')
-			print(dungeon[i].room.door_states, 'door_states')
 			start_room.process_mode = 0 # = Mode: Inherit
 			start_room.show()
-			map_node.add_child(start_room_instance)
-			start_room_instance.z_index = 1
-			start_room_instance.position = i * 514
+			map_node.add_child(start_room)
+			start_room.z_index = 1
+			start_room.position = i * 514
 			
-			var end_room_instance = end_room_variants.instantiate()
-			var end_room = end_room_instance.get_node("End")
+			var end_room = dungeon[i].end_room
 			end_room.generate_doors(dungeon[i].connected_rooms, dungeon[i].room.hidden_doors)
 			end_room.process_mode = 0 # = Mode: Inherit
 			end_room.show()
-			map_node.add_child(end_room_instance)
-			end_room_instance.z_index = 1
-			end_room_instance.position = i * 514
+			map_node.add_child(end_room)
+			end_room.z_index = 1
+			end_room.position = i * 514
 		else:
 			
 			var room = dungeon[i].chosen_variation

@@ -4,8 +4,6 @@ var room = preload("res://Scenes/room.tscn")
 var start_room_instance = preload("res://Scenes/start_rooms.tscn").instantiate()
 var end_room_instance = preload("res://Scenes/end_rooms.tscn").instantiate()
 var hidden_room_instance = preload("res://Scenes/hidden_rooms.tscn").instantiate()
-var start_room = start_room_instance.get_node("Start")
-var end_room = end_room_instance.get_node("End")
 var hidden_room = hidden_room_instance.get_node("Hidden1")
 
 @export var min_number_rooms = 5
@@ -79,8 +77,8 @@ func create_start_end_rooms(dungeon):
 					highest_value = i
 
 	if lowest_value != Vector2(INF, INF) and highest_value != Vector2(-INF, -INF):
-		dungeon[lowest_value].room = start_room
-		dungeon[highest_value].room = end_room
+		dungeon[lowest_value].type = 'start'
+		dungeon[highest_value].type = 'end'
 
 
 
@@ -108,22 +106,23 @@ func create_hidden_rooms(dungeon):
 	for i in potential_links.keys():
 		var disableEntity = false
 		if randf() * 100 < hidden_room_chance:
-#We need to do this to make sure that the index we are creating the hidden room on is not adjacent to a start or end room causing breaking bugs 
+			#We need to do this to make sure that the index we are creating the hidden room on is not adjacent to a start or end room causing breaking bugs 
 			if(dungeon.get(i + Vector2(0, 1))):
-				if(dungeon.get(i + Vector2(0, 1)).room.name == 'Start' or  dungeon.get(i + Vector2(0, 1)).room.name == 'End'):
+				if(dungeon.get(i + Vector2(0, 1)).type == 'start' or  dungeon.get(i + Vector2(0, 1)).type == 'end'):
 					disableEntity = true
 			if(dungeon.get(i + Vector2(0, -1))):
-				if(dungeon.get(i + Vector2(0, -1)).room.name == 'Start' or  dungeon.get(i + Vector2(0, -1)).room.name == 'End'):
+				if(dungeon.get(i + Vector2(0, -1)).type == 'start' or  dungeon.get(i + Vector2(0, -1)).type == 'end'):
 					disableEntity = true
 			if(dungeon.get(i + Vector2(1, 0))):
-				if(dungeon.get(i + Vector2(1, 0)).room.name == 'Start' or  dungeon.get(i + Vector2(1, 0)).room.name == 'End'):
+				if(dungeon.get(i + Vector2(1, 0)).type == 'start' or  dungeon.get(i + Vector2(1, 0)).type == 'end'):
 					disableEntity = true
 			if(dungeon.get(i + Vector2(-1, 0))):
-				if(dungeon.get(i + Vector2(-1, 0)).room.name == 'Start' or  dungeon.get(i + Vector2(-1, 0)).room.name == 'End'):
+				if(dungeon.get(i + Vector2(-1, 0)).type == 'start' or  dungeon.get(i + Vector2(-1, 0)).type == 'end'):
 					disableEntity = true
 				
 			if(!disableEntity):
 				dungeon[i] = room.instantiate()
+				dungeon[i].type = 'hidden'
 				dungeon[i].room = hidden_room
 				connect_rooms(dungeon.get(i - potential_links[i]), dungeon.get(i), potential_links[i])
 				dungeon[i - potential_links[i]].room.hidden_doors[potential_links[i]] = true

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://lahivr45qtis"]
+
+[ext_resource type="Texture2D" uid="uid://bo0cb7gmpifx7" path="res://Sprites/icon.svg" id="1_gch1p"]
+
+[node name="hidden_room_one" type="Node2D"]
+
+[node name="Icon2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.0509804)
+position = Vector2(0, 4.76837e-07)
+scale = Vector2(4, 4)
+texture = ExtResource("1_gch1p")
