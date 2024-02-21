@@ -7,6 +7,7 @@ extends Node
 	Vector2(0,-1): true   # Top door
 }
 
+@export var start_room = false;
 @export var hidden_doors = {
 	Vector2(1,0): false,
 	Vector2(-1,0): false,
@@ -14,8 +15,10 @@ extends Node
 	Vector2(0,-1): false,
 }
 
+
 var door_scene = preload("res://Scenes/door.tscn")
 var hidden_door_scene = preload("res://Scenes/hidden_door.tscn")
+
 
 func generate_doors(connected_rooms, hidden):
 	var doors_to_add = {}

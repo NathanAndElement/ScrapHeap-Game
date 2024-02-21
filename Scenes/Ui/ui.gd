@@ -8,9 +8,10 @@ class_name UI
 var current_weapon
 
 func _physics_process(delta):
-	current_weapon = weapon_manager.weapons[weapon_manager.selectedWeapon].get_node('Weapon')
-	weapon_texture.texture = current_weapon.get_node('Sprite').texture
-	if current_weapon.disable_ammo:
-		ammo_label.text = '&'
-	else:
-		ammo_label.text = str(current_weapon.ammo)
+	if(weapon_manager):
+		current_weapon = weapon_manager.weapons[weapon_manager.selectedWeapon].get_node('Weapon')
+		weapon_texture.texture = current_weapon.get_node('Sprite').texture
+		if current_weapon.disable_ammo:
+			ammo_label.text = '&'
+		else:
+			ammo_label.text = str(current_weapon.ammo)

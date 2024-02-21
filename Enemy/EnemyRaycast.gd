@@ -6,4 +6,5 @@ func _ready():
 	
 
 func _physics_process(delta):
-	look_at(player.global_position)
+	if(player):
+		look_at(player.global_position)

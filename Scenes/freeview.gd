@@ -2,6 +2,11 @@ extends CharacterBody2D
 
 @export var speed = 200.0
 @onready var camera = $Camera2D
+@export var enabled = true
+
+func _ready():
+	if(!enabled):
+		queue_free()
 
 func  _physics_process(delta):
 	#Player movement

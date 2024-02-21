@@ -5,6 +5,7 @@ var node_sprite = load("res://Sprites/map_nodes1.png")
 var branch_sprite = load("res://Sprites/map_nodes3.png")
 var room_variants = load("res://Scenes/room_variants.tscn")
 var hidden_room_variants = load("res://Scenes/hidden_rooms.tscn")
+var playerScene = preload("res://Scenes/player.tscn")
 
 @onready var map_node = $MapNode
 
@@ -27,7 +28,12 @@ func load_map():
 			hidden_room_instance.z_index = 1
 			hidden_room_instance.position = i * 514
 			
-		if(dungeon[i].type == 'end' or dungeon[i].type == 'start'):
+		if(dungeon[i].type == 'start'):
+			var player = playerScene.instantiate()
+			player.position = i * 514
+			map_node.add_child(player)
+			player.z_index = 1000
+			print(dungeon[i].start_room)
 			var start_room = dungeon[i].start_room
 			start_room.generate_doors(dungeon[i].connected_rooms, dungeon[i].room.hidden_doors)
 			start_room.process_mode = 0 # = Mode: Inherit
@@ -35,7 +41,9 @@ func load_map():
 			map_node.add_child(start_room)
 			start_room.z_index = 1
 			start_room.position = i * 514
-			
+
+		if(dungeon[i].type == 'end'):
+			print('end')
 			var end_room = dungeon[i].end_room
 			end_room.generate_doors(dungeon[i].connected_rooms, dungeon[i].room.hidden_doors)
 			end_room.process_mode = 0 # = Mode: Inherit

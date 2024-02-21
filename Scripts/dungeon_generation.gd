@@ -79,6 +79,7 @@ func create_start_end_rooms(dungeon):
 	if lowest_value != Vector2(INF, INF) and highest_value != Vector2(-INF, -INF):
 		dungeon[lowest_value].type = 'start'
 		dungeon[highest_value].type = 'end'
+		
 
 
 
