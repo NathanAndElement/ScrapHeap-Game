@@ -34,8 +34,15 @@ func set_door_state(direction, state):
 	if direction in door_states:
 		door_states[direction] = state
 
-func is_door_enabled(direction):
-	return door_states.get(direction, false)
+func is_door_enabled(direction, type):
+	if type == 'basic':
+		return chosen_variation.door_states.get(direction, false)
+	elif type == 'start':
+		return start_room.door_states.get(direction)
+	elif type == 'end':
+		return start_room.door_states.get(direction)
+	elif type == 'hidden':
+		return start_room.door_states.get(direction)
 
 var connected_rooms = {
 	Vector2(1,0): null,

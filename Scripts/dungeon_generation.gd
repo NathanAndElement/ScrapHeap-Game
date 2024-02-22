@@ -54,10 +54,11 @@ func create_rooms(dungeon, direction, i):
 	var new_room_position = i + direction
 	if not dungeon.has(new_room_position):
 		dungeon[new_room_position] = room.instantiate()
-		if (dungeon[new_room_position].is_door_enabled(-direction)):
+		if (dungeon[new_room_position].is_door_enabled(-direction, 'basic') and dungeon[i].is_door_enabled(direction, 'basic')):
 			connect_rooms(dungeon.get(i), dungeon.get(new_room_position), direction)
 			return true
 		else:
+			print('erasing')
 			dungeon.erase(new_room_position)
 			return false
 	return false
@@ -90,17 +91,17 @@ func create_hidden_rooms(dungeon):
 	for i in dungeon.keys():
 		var room = dungeon[i]
 		#check the room connections
-		if(!room.connected_rooms[Vector2(0, 1)] and room.is_door_enabled(Vector2(0, 1))):
+		if(!room.connected_rooms[Vector2(0, 1)] and room.is_door_enabled(Vector2(0, 1), 'basic')):
 			#make sure the room doesnt already exist on the new given index as this would make connected_rooms incorrect
 			if(!dungeon.has(i + Vector2(0, 1)) ):
 				potential_links[i + Vector2(0, 1)] = Vector2(0, 1)
-		if(!room.connected_rooms[Vector2(0, -1)] and room.is_door_enabled(Vector2(0, -1))):
+		if(!room.connected_rooms[Vector2(0, -1)] and room.is_door_enabled(Vector2(0, -1), 'basic')):
 			if(!dungeon.has(i + Vector2(0, -1))):
 				potential_links[i + Vector2(0, -1)] = Vector2(0, -1)
-		if(!room.connected_rooms[Vector2(1, 0)] and room.is_door_enabled(Vector2(1, 0))):
+		if(!room.connected_rooms[Vector2(1, 0)] and room.is_door_enabled(Vector2(1, 0), 'basic')):
 			if(!dungeon.has(i + Vector2(1, 0))):
 				potential_links[i + Vector2(1, 0)] = Vector2(1, 0)
-		if(!room.connected_rooms[Vector2(-1, 0)] and room.is_door_enabled(Vector2(-1, 0))):
+		if(!room.connected_rooms[Vector2(-1, 0)] and room.is_door_enabled(Vector2(-1, 0), 'basic')):
 			if(!dungeon.has(i + Vector2(-1, 0))):
 				potential_links[i + Vector2(-1, 0)] = Vector2(-1, 0)
 	#Loop through potential links and use spawn chance to decide whether to spawn a hidden room there or not
@@ -138,22 +139,22 @@ func connect_rooms(room1, room2, direction):
 		
 
 func check_directions(room, index, switch):
-	if(!room.connected_rooms[Vector2(0, 1)] and room.is_door_enabled(Vector2(0, 1))):
+	if(!room.connected_rooms[Vector2(0, 1)] and room.is_door_enabled(Vector2(0, 1), 'start')):
 		if(switch):
 			return room
 		else:
 			return index
-	if(!room.connected_rooms[Vector2(0, -1)] and room.is_door_enabled(Vector2(0, -1))):
+	if(!room.connected_rooms[Vector2(0, -1)] and room.is_door_enabled(Vector2(0, -1), 'start')):
 		if(switch):
 			return room
 		else:
 			return index
-	if(!room.connected_rooms[Vector2(1, 0)] and room.is_door_enabled(Vector2(1, 0))):
+	if(!room.connected_rooms[Vector2(1, 0)] and room.is_door_enabled(Vector2(1, 0), 'start')):
 		if(switch):
 			return room
 		else:
 			return index
-	if(!room.connected_rooms[Vector2(-1, 0)] and room.is_door_enabled(Vector2(-1, 0))):
+	if(!room.connected_rooms[Vector2(-1, 0)] and room.is_door_enabled(Vector2(-1, 0), 'start')):
 		if(switch):
 			return room
 		else:

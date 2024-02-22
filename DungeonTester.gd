@@ -51,8 +51,7 @@ func load_map():
 			map_node.add_child(end_room)
 			end_room.z_index = 1
 			end_room.position = i * 514
-		else:
-			
+		elif dungeon[i].type == 'basic':
 			var room = dungeon[i].chosen_variation
 			room.generate_doors(dungeon[i].connected_rooms, dungeon[i].room.hidden_doors)
 			room.process_mode = 0 # = Mode: Inherit
