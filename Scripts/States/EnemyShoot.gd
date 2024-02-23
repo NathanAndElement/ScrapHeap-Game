@@ -1,7 +1,7 @@
 extends State
 class_name EnemyShoot
 
-@onready var target_node = get_node("/root/Game/World/Player")
+@onready var target_node
 @export var state_change_range: float = 40
 @onready var enemy: CharacterBody2D = $"../.."
 @onready var nav_agent: NavigationAgent2D = $"../../Navigation/NavigationAgent2D"
@@ -11,16 +11,19 @@ class_name EnemyShoot
 var player: CharacterBody2D
 
 func Enter():	
-	player = get_node("/root/Game/World/Player")
 	var current_state = bullet_manager.get_node('StateMachine').current_state
 	current_state.Transitioned.emit(current_state, 'basic')
+	
 
 func Exit():
 	var current_state = bullet_manager.get_node('StateMachine').current_state
 	current_state.Transitioned.emit(current_state, 'stop')
 
 func Physics_Update(delta: float):
-	bullet_manager.look_at(target_node.global_position)
+	if(!player):
+		player = get_node("/root/Game/Testing/DungeonTester/MapNode/Player")
+		
+	bullet_manager.look_at(player.global_position)
 	#Change state if raycast is within range on the player
 	var raycast_colliding_node = raycast.get_collider();
 	

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3m7baodwrup2"]
+[gd_scene load_steps=5 format=3 uid="uid://d3m7baodwrup2"]
 
 [ext_resource type="Script" path="res://Scenes/room.gd" id="1_0mwmv"]
 [ext_resource type="Texture2D" uid="uid://bo0cb7gmpifx7" path="res://Sprites/icon.svg" id="1_liv78"]
 [ext_resource type="TileSet" uid="uid://bq4sf4e1ea61u" path="res://Scenes/World.tres" id="3_6p7tj"]
+[ext_resource type="PackedScene" uid="uid://d331edhcm08u3" path="res://Enemy/enemy.tscn" id="4_srjss"]
 
 [node name="Start_one" type="Node2D"]
 script = ExtResource("1_0mwmv")
@@ -16,3 +17,6 @@ layer_0/tile_data = PackedInt32Array(-589834, 65536, 1, -589833, 65536, 1, -5898
 [node name="Icon3" type="Sprite2D" parent="."]
 scale = Vector2(0.375, 0.375)
 texture = ExtResource("1_liv78")
+
+[node name="Enemy" parent="." instance=ExtResource("4_srjss")]
+position = Vector2(104, 0)

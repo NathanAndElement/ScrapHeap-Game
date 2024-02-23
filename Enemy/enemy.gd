@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
-@export var speed = 50
+@export var speed = 20
 @export var nav_agent: NavigationAgent2D
 @export var health = 100
 @export var damage = 20
+
+func _ready():
+	z_index = 10
 
 func _physics_process(_delta):
 	if health <= 0:

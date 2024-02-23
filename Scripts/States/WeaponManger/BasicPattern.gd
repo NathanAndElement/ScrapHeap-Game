@@ -24,6 +24,7 @@ func Exit():
 func _on_shoot_timer_timeout():
 	var bullet_instance = bullet_manager.bullet.instantiate()
 	
+	bullet_instance.z_index = 10
 	bullet_instance.speed = bullet_speed
 	bullet_instance.life_span = bullet_life_span
 	bullet_instance.wobble_intensity = bullet_wobble_intensity

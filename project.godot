@@ -17,6 +17,7 @@ config/icon="res://Sprites/icon.svg"
 
 [autoload]
 
+SignalManager="*res://Scripts/signal_manager.gd"
 DungeonGeneration="*res://Scripts/dungeon_generation.gd"
 
 [display]

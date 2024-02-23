@@ -18,6 +18,7 @@ collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_7luxf")
+speed = 10
 nav_agent = NodePath("Navigation/NavigationAgent2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

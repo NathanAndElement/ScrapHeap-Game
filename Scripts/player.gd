@@ -18,6 +18,7 @@ var invincible = false
 signal Damage
 
 func _ready():
+	SignalManager.player_instantiated.emit()
 	regen_timer.wait_time = health_regen_timer
 	update_health()
 	Damage.connect(on_damage)

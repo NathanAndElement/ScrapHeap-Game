@@ -1,7 +1,6 @@
 extends State
 class_name EnemyFollow
 
-@onready var target_node = get_node("/root/Game/World/Player")
 
 @export var state_change_range: float = 40
 @onready var enemy: CharacterBody2D = $"../.."
@@ -9,11 +8,15 @@ class_name EnemyFollow
 @onready var raycast: RayCast2D = $"../../RayCast2D"
 var player: CharacterBody2D
 
-func Enter():	
-	player = get_node("/root/Game/World/Player")
+func _ready():
+	pass
 
-func Physics_Update(delta: float):
+func Enter():
+	pass
 	
+func Physics_Update(delta: float):
+	if(!player):
+		player = get_node("/root/Game/Testing/DungeonTester/MapNode/Player")
 	#Change state if raycast is within range on the player
 	var raycast_colliding_node = raycast.get_collider();
 	if raycast_colliding_node and raycast_colliding_node.name == 'VisibilityArea':
@@ -27,8 +30,8 @@ func Physics_Update(delta: float):
 	
 
 func recalc_path():
-	if(target_node):
-		nav_agent.target_position = target_node.global_position
+	if(player):
+		nav_agent.target_position = player.global_position
 
 func _on_timer_timeout():
 	recalc_path()
