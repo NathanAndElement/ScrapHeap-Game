@@ -4,12 +4,14 @@ extends CharacterBody2D
 @export var nav_agent: NavigationAgent2D
 @export var health = 100
 @export var damage = 20
+@export var stop_radius = 100
 @onready var timer: Timer = $Navigation/Timer
 var player: CharacterBody2D
 var path = []
 var map
 var can_recalc = true
 var is_following = false
+var ramdom_direction = randf()
 
 func _ready():
 	z_index = 10
@@ -58,7 +60,11 @@ func _on_collision_area_area_exited(area):
 	
 func recalc_path():
 	if(player and is_following):
-		nav_agent.target_position = player.global_position
+		var centre = player.global_position
+		var angle = ramdom_direction * PI * 2
+		var x = centre.x + cos(angle) * stop_radius
+		var y = centre.y + sin(angle) * stop_radius
+		nav_agent.target_position = Vector2(x, y)
 
 func _on_timer_timeout():
 	if(is_following):

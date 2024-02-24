@@ -21,7 +21,7 @@ func Exit():
 	current_state.Transitioned.emit(current_state, 'stop')
 
 func Physics_Update(delta: float):	
-	if(enemy.player.global_position.distance_to(enemy.global_position) < 400):
+	if(enemy.player.global_position.distance_to(enemy.global_position) < enemy.stop_radius):
 		enemy.stop_moving()		
 		enemy.is_following = false
 	else:
