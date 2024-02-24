@@ -40,10 +40,11 @@ func generate(room_seed):
 					break # Break if any room was created in this iteration
 			attempt_count += 1
 			if not created_room:
-				print("Attempt %d failed to create a new room" % attempt_count)
+				#print("Attempt %d failed to create a new room" % attempt_count)
+				break
 		
 		if attempt_count >= attempt_limit and not created_room:
-			print("Max attempts reached, unable to create more rooms.")
+			#print("Max attempts reached, unable to create more rooms.")
 			break
 	create_start_end_rooms(dungeon)
 	
@@ -58,7 +59,6 @@ func create_rooms(dungeon, direction, i):
 			connect_rooms(dungeon.get(i), dungeon.get(new_room_position), direction)
 			return true
 		else:
-			print('erasing')
 			dungeon.erase(new_room_position)
 			return false
 	return false

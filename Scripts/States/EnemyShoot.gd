@@ -8,7 +8,6 @@ class_name EnemyShoot
 @onready var raycast: RayCast2D = $"../../RayCast2D"
 @onready var bullet_manager = $"../../BulletManager"
 
-var player: CharacterBody2D
 
 func Enter():	
 	var current_state = bullet_manager.get_node('StateMachine').current_state
@@ -19,28 +18,25 @@ func Exit():
 	var current_state = bullet_manager.get_node('StateMachine').current_state
 	current_state.Transitioned.emit(current_state, 'stop')
 
-func Physics_Update(delta: float):
-	if(!player):
-		player = get_node("/root/Game/Testing/DungeonTester/MapNode/Player")
-		
-	bullet_manager.look_at(player.global_position)
-	#Change state if raycast is within range on the player
-	var raycast_colliding_node = raycast.get_collider();
+func Physics_Update(delta: float):	
+	if(enemy.player):
+		bullet_manager.look_at(enemy.player.global_position)
+		#Change state if raycast is within range on the player
+		var raycast_colliding_node = raycast.get_collider();
 	
-	if raycast_colliding_node == null or raycast_colliding_node.name != 'VisibilityArea':
-		Transitioned.emit(self, 'follow')
+		if raycast_colliding_node == null or raycast_colliding_node.name != 'VisibilityArea':
+			Transitioned.emit(self, 'follow')
 
 		
-	if nav_agent.is_navigation_finished():
-		return
-	var axis = enemy.to_local(nav_agent.get_next_path_position()).normalized()
-	var intended_velocity = axis * enemy.speed
-	nav_agent.set_velocity(intended_velocity)
+		if nav_agent.is_navigation_finished():
+			return
+		var axis = enemy.to_local(nav_agent.get_next_path_position()).normalized()
+		var intended_velocity = axis * enemy.speed
+		nav_agent.set_velocity(intended_velocity)
 	
 
 func recalc_path():
-	if(target_node):
-		nav_agent.target_position = target_node.global_position
+	nav_agent.target_position = enemy.player.global_position
 
 func _on_timer_timeout():
 	recalc_path()

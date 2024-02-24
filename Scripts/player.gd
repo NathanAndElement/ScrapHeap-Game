@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed: float = 100.0
+@export var speed: float = 400.0
 @export var max_health: float = 100.0
 @export var health_regen = 1
 @export var health_regen_timer = 1
@@ -17,8 +17,8 @@ var invincible = false
 
 signal Damage
 
+
 func _ready():
-	SignalManager.player_instantiated.emit()
 	regen_timer.wait_time = health_regen_timer
 	update_health()
 	Damage.connect(on_damage)
@@ -74,3 +74,8 @@ func on_damage(damage):
 		invincibility_timer.start(invincibility_timer_wait)
 		health -= damage
 		update_health()
+
+
+func _on_tree_entered():
+	name = 'Player'
+	SignalManager.player_instantiated.emit()

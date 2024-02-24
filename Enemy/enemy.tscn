@@ -36,7 +36,7 @@ avoidance_layers = 7
 avoidance_mask = 7
 
 [node name="Timer" type="Timer" parent="Navigation"]
-wait_time = 0.1
+wait_time = 0.5
 autostart = true
 
 [node name="CollisionArea" type="Area2D" parent="."]

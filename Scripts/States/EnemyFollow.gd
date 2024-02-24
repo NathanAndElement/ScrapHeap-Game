@@ -6,17 +6,10 @@ class_name EnemyFollow
 @onready var enemy: CharacterBody2D = $"../.."
 @onready var nav_agent: NavigationAgent2D = $"../../Navigation/NavigationAgent2D"
 @onready var raycast: RayCast2D = $"../../RayCast2D"
-var player: CharacterBody2D
+@onready var player: CharacterBody2D = get_node("/root/Game/Testing/DungeonTester/MapNode/Player")
 
-func _ready():
-	pass
-
-func Enter():
-	pass
 	
 func Physics_Update(delta: float):
-	if(!player):
-		player = get_node("/root/Game/Testing/DungeonTester/MapNode/Player")
 	#Change state if raycast is within range on the player
 	var raycast_colliding_node = raycast.get_collider();
 	if raycast_colliding_node and raycast_colliding_node.name == 'VisibilityArea':
@@ -28,10 +21,9 @@ func Physics_Update(delta: float):
 	var intended_velocity = axis * enemy.speed
 	nav_agent.set_velocity(intended_velocity)
 	
-
 func recalc_path():
-	if(player):
-		nav_agent.target_position = player.global_position
+	if(enemy.player):
+		nav_agent.target_position = enemy.player.global_position
 
 func _on_timer_timeout():
 	recalc_path()

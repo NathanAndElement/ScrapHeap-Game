@@ -4,11 +4,17 @@ extends CharacterBody2D
 @export var nav_agent: NavigationAgent2D
 @export var health = 100
 @export var damage = 20
+var player: CharacterBody2D
 
 func _ready():
 	z_index = 10
-
+	player = get_node("/root/Game/Testing/DungeonTester/MapNode/Player")
+func Enter():
+	pass
+	
 func _physics_process(_delta):
+	if(!player):
+		player = get_node("/root/Game/Testing/DungeonTester/MapNode/Player")
 	if health <= 0:
 		kill_unit()
 
