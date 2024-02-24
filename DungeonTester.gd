@@ -6,7 +6,7 @@ var branch_sprite = load("res://Sprites/map_nodes3.png")
 var room_variants = load("res://Scenes/room_variants.tscn")
 var hidden_room_variants = load("res://Scenes/hidden_rooms.tscn")
 var playerScene = preload("res://Scenes/player.tscn")
-var room_size = 1024
+var room_size = 1152
 
 @onready var map_node = $MapNode
 signal map_deleted
@@ -76,14 +76,14 @@ func load_map():
 			temp.texture = branch_sprite
 			map_node.add_child(temp)
 			temp.z_index = 0
-			temp.position = i * room_size + Vector2(255, 0.5)
+			temp.position = i * room_size + Vector2(room_size / 2, 0.5)
 		if(c_rooms.get(Vector2(0, 1)) != null):
 			temp = Sprite2D.new()
 			temp.texture = branch_sprite
 			map_node.add_child(temp)
 			temp.z_index = 0
 			temp.rotation_degrees = 90
-			temp.position = i * room_size + Vector2(0.5, 255)
+			temp.position = i * room_size + Vector2(0.5, room_size / 2)
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Interact"):

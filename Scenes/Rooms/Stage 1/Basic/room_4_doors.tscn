@@ -23,4 +23,3 @@ layer_1/name = "Walls"
 layer_1/tile_data = PackedInt32Array(-196602, 196608, 1, -262138, 196608, 1, -327674, 196608, 1, -393210, 196608, 1)
 
 [node name="Enemy" parent="." instance=ExtResource("4_bpicg")]
-position = Vector2(0, -184)

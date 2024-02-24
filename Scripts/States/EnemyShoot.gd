@@ -7,18 +7,25 @@ class_name EnemyShoot
 @onready var nav_agent: NavigationAgent2D = $"../../Navigation/NavigationAgent2D"
 @onready var raycast: RayCast2D = $"../../RayCast2D"
 @onready var bullet_manager = $"../../BulletManager"
+@onready var timer: Timer = $"../../Navigation/Timer"
 
 
 func Enter():	
+	enemy.is_following = true
 	var current_state = bullet_manager.get_node('StateMachine').current_state
 	current_state.Transitioned.emit(current_state, 'basic')
 	
-
 func Exit():
+	enemy.is_following = false
 	var current_state = bullet_manager.get_node('StateMachine').current_state
 	current_state.Transitioned.emit(current_state, 'stop')
 
 func Physics_Update(delta: float):	
+	if(enemy.player.global_position.distance_to(enemy.global_position) < 400):
+		enemy.stop_moving()		
+		enemy.is_following = false
+	else:
+		enemy.is_following = true
 	if(enemy.player):
 		bullet_manager.look_at(enemy.player.global_position)
 		#Change state if raycast is within range on the player
@@ -34,14 +41,3 @@ func Physics_Update(delta: float):
 		var intended_velocity = axis * enemy.speed
 		nav_agent.set_velocity(intended_velocity)
 	
-
-func recalc_path():
-	nav_agent.target_position = enemy.player.global_position
-
-func _on_timer_timeout():
-	recalc_path()
-
-
-func _on_navigation_agent_2d_velocity_computed(safe_velocity):
-	enemy.velocity = safe_velocity
-	enemy.move_and_slide()
