@@ -96,10 +96,6 @@ autostart = true
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
-script = ExtResource("3_lgn38")
-
 [node name="HeathBar" type="ProgressBar" parent="."]
 modulate = Color(0.262745, 0.65098, 0.219608, 1)
 offset_left = -10.7307
@@ -118,6 +114,15 @@ frame = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_mn26i")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+zoom = Vector2(0.4, 0.4)
+limit_right = -10000000
+limit_bottom = -10000000
+script = ExtResource("3_lgn38")
+target = NodePath("..")
+max_distance = 10.0
+smooth_speed = 2.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
