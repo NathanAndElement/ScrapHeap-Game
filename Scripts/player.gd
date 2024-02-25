@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var health_regen = 1
 @export var health_regen_timer = 1
 @export var invincibility_timer_wait = .5
+@export var camera_pan_speed = 2
 
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var healthBar: ProgressBar = $HeathBar
@@ -12,6 +13,8 @@ extends CharacterBody2D
 @onready var regen_timer = $RegenTimer
 @onready var invincibility_timer = $InvincibilityTimer
 @onready var colliding_enemies = []
+@onready var camera: Camera2D = $Camera2D
+
 
 var invincible = false
 
@@ -24,6 +27,8 @@ func _ready():
 	Damage.connect(on_damage)
 	
 func  _physics_process(delta):
+
+	
 	#Player movement
 	var input_direction =  Vector2(
 	Input.get_action_strength("right") - Input.get_action_strength("left"),
