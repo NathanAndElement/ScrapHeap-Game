@@ -8,12 +8,20 @@ class_name EnemyShoot
 @onready var raycast: RayCast2D = $"../../RayCast2D"
 @onready var bullet_manager = $"../../BulletManager"
 @onready var timer: Timer = $"../../Navigation/Timer"
+var current_state
 
 
 func Enter():	
 	enemy.is_following = true
-	var current_state = bullet_manager.get_node('StateMachine').current_state
+	#stop old state
+	current_state = bullet_manager.get_node('StateMachine').current_state
 	current_state.Transitioned.emit(current_state, 'basic')
+	#get new state
+	current_state = bullet_manager.get_node('StateMachine').current_state as BulletManagerBasic
+	current_state.bullet_speed = 600
+	current_state.attack_speed = 1
+	current_state.reload_speed = 1.7
+	
 	
 func Exit():
 	enemy.is_following = false

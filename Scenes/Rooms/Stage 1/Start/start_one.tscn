@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3m7baodwrup2"]
+[gd_scene load_steps=5 format=3 uid="uid://b5myte2dptvkh"]
 
 [ext_resource type="Script" path="res://Scenes/room.gd" id="1_0mwmv"]
 [ext_resource type="Texture2D" uid="uid://bo0cb7gmpifx7" path="res://Sprites/icon.svg" id="1_liv78"]
@@ -22,51 +22,3 @@ layer_1/name = "Walls"
 layer_1/tile_data = PackedInt32Array(-196602, 196608, 1, -262138, 196608, 1, -327674, 196608, 1, -393210, 196608, 1)
 
 [node name="Enemy" parent="." instance=ExtResource("4_srjss")]
-
-[node name="Enemy2" parent="." instance=ExtResource("4_srjss")]
-
-[node name="Enemy3" parent="." instance=ExtResource("4_srjss")]
-
-[node name="Enemy4" parent="." instance=ExtResource("4_srjss")]
-
-[node name="Enemy5" parent="." instance=ExtResource("4_srjss")]
-
-[node name="Enemy6" parent="." instance=ExtResource("4_srjss")]
-
-[node name="Enemy7" parent="." instance=ExtResource("4_srjss")]
-
-[node name="Enemy8" parent="." instance=ExtResource("4_srjss")]
-
-[node name="Enemy9" parent="." instance=ExtResource("4_srjss")]
-
-[node name="Enemy10" parent="." instance=ExtResource("4_srjss")]
-
-[node name="Enemy11" parent="." instance=ExtResource("4_srjss")]
-position = Vector2(-80, -40)
-
-[node name="Enemy12" parent="." instance=ExtResource("4_srjss")]
-position = Vector2(136, 56)
-
-[node name="Enemy13" parent="." instance=ExtResource("4_srjss")]
-position = Vector2(184, 0)
-
-[node name="Enemy14" parent="." instance=ExtResource("4_srjss")]
-position = Vector2(0, 24)
-
-[node name="Enemy15" parent="." instance=ExtResource("4_srjss")]
-position = Vector2(-144, 0)
-
-[node name="Enemy16" parent="." instance=ExtResource("4_srjss")]
-position = Vector2(0, -40)
-
-[node name="Enemy17" parent="." instance=ExtResource("4_srjss")]
-position = Vector2(128, 0)
-
-[node name="Enemy18" parent="." instance=ExtResource("4_srjss")]
-position = Vector2(-64, 0)
-
-[node name="Enemy19" parent="." instance=ExtResource("4_srjss")]
-position = Vector2(0, -88)
-
-[node name="Enemy20" parent="." instance=ExtResource("4_srjss")]
-position = Vector2(-8, 64)

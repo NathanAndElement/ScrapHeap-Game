@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
-@export var speed = 20
+@export var speed = 37
 @export var nav_agent: NavigationAgent2D
 @export var health = 100
 @export var damage = 20
 @export var stop_radius = 100
+@export var mag_size = 6
+@export var reload_speed = 1
 @onready var timer: Timer = $Navigation/Timer
+
 var player: CharacterBody2D
 var path = []
 var map

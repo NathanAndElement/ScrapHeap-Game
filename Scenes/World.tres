@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=17 format=3 uid="uid://bq4sf4e1ea61u"]
+[gd_resource type="TileSet" load_steps=18 format=3 uid="uid://bq4sf4e1ea61u"]
 
 [ext_resource type="Texture2D" uid="uid://bc5052xkfgimx" path="res://Sprites/pixil-frame-0.png" id="1_n56jn"]
 
@@ -45,6 +45,13 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ouatw"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 agent_radius = 0.0
 
@@ -268,7 +275,7 @@ texture = ExtResource("1_n56jn")
 7:2/0 = 0
 7:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:2/0/physics_layer_0/angular_velocity = 0.0
-7:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_mu0fr")
+7:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_ouatw")
 8:2/0 = 0
 8:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:2/0/physics_layer_0/angular_velocity = 0.0
