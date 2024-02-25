@@ -9,10 +9,7 @@ func _physics_process(delta):
 	var mouse_position = get_global_mouse_position()
 	var centre_position = target.global_position
 	
-	
 	var offset_difference = centre_position - mouse_position
-	
-	print(offset_difference)
 	
 	# Calculate the new position using lerp
 	var new_position = lerp(position, Vector2(-offset_difference.x / 8, -offset_difference.y / 8), camera_pan_speed)
