@@ -115,7 +115,7 @@ position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_mn26i")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.7, 0.7)
+zoom = Vector2(0.4, 0.4)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -143,6 +143,7 @@ shape = SubResource("CircleShape2D_y72lm")
 
 [connection signal="Damage" from="." to="." method="_on_damage"]
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="timeout" from="RegenTimer" to="." method="_on_regen_timer_timeout"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="child_entered_tree" from="WeaponManager" to="WeaponManager" method="_on_child_entered_tree"]

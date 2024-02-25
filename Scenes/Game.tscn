@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://gq3cyxe4d0dj"]
+[gd_scene load_steps=3 format=3 uid="uid://gq3cyxe4d0dj"]
 
-[ext_resource type="PackedScene" uid="uid://cjrc74m2k2tny" path="res://Scenes/World.tscn" id="1_25wwy"]
 [ext_resource type="PackedScene" uid="uid://c87uivwymk0vh" path="res://Scenes/Ui/ui.tscn" id="2_d72k7"]
 [ext_resource type="PackedScene" uid="uid://bothv8eqkm1ok" path="res://Scenes/testing.tscn" id="3_r7tcx"]
 
@@ -9,5 +8,3 @@
 [node name="Testing" parent="." instance=ExtResource("3_r7tcx")]
 
 [node name="Ui" parent="." instance=ExtResource("2_d72k7")]
-
-[node name="World" parent="." instance=ExtResource("1_25wwy")]
