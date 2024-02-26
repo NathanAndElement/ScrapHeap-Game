@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsktuwccnrxr4"]
+[gd_scene load_steps=5 format=3 uid="uid://dsktuwccnrxr4"]
 
 [ext_resource type="Texture2D" uid="uid://bo0cb7gmpifx7" path="res://Sprites/icon.svg" id="1_m81uv"]
 [ext_resource type="Script" path="res://Scenes/room.gd" id="1_voakm"]
 [ext_resource type="TileSet" uid="uid://bq4sf4e1ea61u" path="res://Scenes/World.tres" id="2_kg2j1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhxur"]
+size = Vector2(1040, 1040)
 
 [node name="end_one" type="Node2D"]
 script = ExtResource("1_voakm")
@@ -19,3 +22,13 @@ layer_1/tile_data = PackedInt32Array(-196602, 196608, 1, -262138, 196608, 1, -32
 position = Vector2(-3, 9)
 scale = Vector2(1.52344, 1.52344)
 texture = ExtResource("1_m81uv")
+
+[node name="RoomCollision" type="Area2D" parent="."]
+light_mask = 2
+visibility_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomCollision"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_jhxur")
+
+[connection signal="area_shape_entered" from="RoomCollision" to="." method="_on_room_collision_area_shape_entered"]

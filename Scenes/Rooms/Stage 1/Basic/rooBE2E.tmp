@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3k7pkidr4ops"]
+[gd_scene load_steps=6 format=3 uid="uid://c3k7pkidr4ops"]
 
 [ext_resource type="Script" path="res://Scenes/room.gd" id="1_r2gpw"]
 [ext_resource type="Texture2D" uid="uid://bo0cb7gmpifx7" path="res://Sprites/icon.svg" id="2_paqol"]
 [ext_resource type="TileSet" uid="uid://bq4sf4e1ea61u" path="res://Scenes/World.tres" id="3_k4rff"]
 [ext_resource type="PackedScene" uid="uid://d331edhcm08u3" path="res://Enemy/enemy.tscn" id="4_bpicg"]
-[ext_resource type="PackedScene" uid="uid://djgaericpjkf7" path="res://Scenes/enemy_spawner.tscn" id="5_kt2sb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sqjww"]
 size = Vector2(1040, 1040)
@@ -35,8 +34,6 @@ visibility_layer = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomCollision"]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_sqjww")
-
-[node name="EnemySpawner" parent="." instance=ExtResource("5_kt2sb")]
 
 [connection signal="area_shape_entered" from="RoomCollision" to="." method="_on_room_collision_area_shape_entered"]
 [connection signal="body_entered" from="RoomCollision" to="." method="_on_room_collision_body_entered"]

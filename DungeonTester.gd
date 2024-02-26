@@ -45,6 +45,7 @@ func load_map():
 			player.position = i * room_size
 			player.z_index = 1000
 			var start_room = dungeon[i].start_room
+			start_room.coordinates = i
 			start_room.generate_doors(dungeon[i].connected_rooms, dungeon[i].room.hidden_doors)
 			start_room.process_mode = 0 # = Mode: Inherit
 			start_room.show()
@@ -55,6 +56,7 @@ func load_map():
 		if(dungeon[i].type == 'end'):
 			var end_room = dungeon[i].end_room
 			end_room.generate_doors(dungeon[i].connected_rooms, dungeon[i].room.hidden_doors)
+			end_room.coordinates = i
 			end_room.process_mode = 0 # = Mode: Inherit
 			end_room.show()
 			map_node.add_child(end_room)
@@ -63,6 +65,7 @@ func load_map():
 		elif dungeon[i].type == 'basic':
 			var room = dungeon[i].chosen_variation
 			room.generate_doors(dungeon[i].connected_rooms, dungeon[i].room.hidden_doors)
+			room.coordinates = i
 			room.process_mode = 0 # = Mode: Inherit
 			room.show()
 			map_node.add_child(room)

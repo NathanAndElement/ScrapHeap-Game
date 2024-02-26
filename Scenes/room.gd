@@ -1,7 +1,12 @@
 extends Node
+class_name room_instance
 
 var close_doors = {}
 var offset_distance = 512  # Adjust based on your door size or desired distance from the center
+var coordinates: Vector2
+var room_activated: bool
+signal room_activated_signal
+
 
 @export var door_states = {
 	Vector2(1,0): true,   # Right door
@@ -17,7 +22,6 @@ var offset_distance = 512  # Adjust based on your door size or desired distance 
 	Vector2(0,1): false,
 	Vector2(0,-1): false,
 }
-
 
 var door_scene = preload("res://Scenes/door.tscn")
 var hidden_door_scene = preload("res://Scenes/hidden_door.tscn")
@@ -50,6 +54,7 @@ func generate_doors(connected_rooms, hidden):
 func _ready():
 	block_unused_doors()
 	
+	
 func block_unused_doors():
 	if(close_doors.size() > 0 and tile_map):
 		for direction in close_doors:
@@ -67,3 +72,11 @@ func block_unused_doors():
 		
 			for cell in cells_to_replace:
 				tile_map.set_cell(ground_layer, cell, source_id, Vector2i(3,1))
+
+func _on_room_collision_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	if(area.name == 'VisibilityArea' and !room_activated):
+		activate_room()
+
+func activate_room():
+	room_activated = true
+	emit_signal("room_activated_signal")
